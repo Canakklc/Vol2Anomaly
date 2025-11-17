@@ -38,7 +38,7 @@ public class GuideBook : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.E) && bookVisible == true)
         {
-            if (currentIndex <= Pages.Count)
+            if (currentIndex < Pages.Count)
             {
                 StartMovePages();
                 currentIndex++;
@@ -47,7 +47,7 @@ public class GuideBook : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Q) && bookVisible == true)
         {
-            if (currentIndex <= Pages.Count)
+            if (currentIndex > 0)
             {
                 MovePagesBack();
                 currentIndex--;
@@ -131,7 +131,7 @@ public class GuideBook : MonoBehaviour
     }
     void MovePagesBack()
     {
-        StartCoroutine(MovePages(currentIndex, false));
+        StartCoroutine(MovePages(currentIndex - 1, false));
         Debug.Log("PAGES RE MOVIGN BACK");
     }
     IEnumerator ResetPages()
