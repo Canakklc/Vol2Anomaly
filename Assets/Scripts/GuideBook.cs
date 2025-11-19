@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class GuideBook : MonoBehaviour
 {
+    //other scripts
+    charMovement handleRot;
     public GameObject Player;
     public Transform bookPlace;
     public GameObject guideBook;
@@ -13,6 +15,10 @@ public class GuideBook : MonoBehaviour
     [Header("Bools")]
     public bool bookVisible = false;
 
+    void Awake()
+    {
+        handleRot = GameObject.FindWithTag("Player").GetComponent<charMovement>();
+    }
 
 
     void Start()
@@ -53,6 +59,11 @@ public class GuideBook : MonoBehaviour
                 currentIndex--;
             }
             else { return; }
+        }
+        if (bookVisible == true)
+        {
+            handleRot.xRotation = Math.Clamp(handleRot.xRotation, -15f, 15f);
+            handleRot.playerCam.localRotation = Quaternion.Euler(handleRot.xRotation, 0f, 0f);
         }
     }
 

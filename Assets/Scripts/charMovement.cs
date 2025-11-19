@@ -7,6 +7,7 @@ public class charMovement : MonoBehaviour
     PostProcesses camEffects;
     CCTVandCAM takeBool;
     Rigidbody rb;
+    GuideBook bookBool;
     public Transform playerCam;
 
     [Header("Movement Settings")]
@@ -25,7 +26,7 @@ public class charMovement : MonoBehaviour
     public bool canJump;
     public bool isRunning;
 
-    float xRotation = 0f;
+    public float xRotation = 0f;
     bool wasRunning = false;
 
     void Awake()
@@ -33,7 +34,7 @@ public class charMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         camEffects = GameObject.FindWithTag("Settings").GetComponent<PostProcesses>();
         takeBool = GameObject.FindWithTag("Settings").GetComponent<CCTVandCAM>();
-
+        bookBool = GameObject.FindWithTag("Settings").GetComponent<GuideBook>();
 
     }
 
@@ -66,7 +67,7 @@ public class charMovement : MonoBehaviour
 
         if (sprintKey && !wasRunning)
         {
-            if (takeBool.onCCTV == false && Input.GetKey(KeyCode.W))
+            if (takeBool.onCCTV == false && Input.GetKey(KeyCode.W) && bookBool.bookVisible == false)
             {
                 camEffects.StartFOW();
             }
@@ -74,7 +75,7 @@ public class charMovement : MonoBehaviour
 
         else if (!sprintKey && wasRunning)
         {
-            if (takeBool.onCCTV == false && Input.GetKey(KeyCode.W))
+            if (takeBool.onCCTV == false && Input.GetKey(KeyCode.W) && bookBool.bookVisible == false)
             {
                 camEffects.FinishFow();
             }
@@ -82,7 +83,7 @@ public class charMovement : MonoBehaviour
 
         if (sprintKey)
         {
-            if (takeBool.onCCTV == false)
+            if (takeBool.onCCTV == false && bookBool.bookVisible == false)
             {
                 if (Input.GetKey(KeyCode.W))
                 {
