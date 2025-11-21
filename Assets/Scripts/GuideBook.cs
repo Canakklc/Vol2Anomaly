@@ -62,9 +62,27 @@ public class GuideBook : MonoBehaviour
         }
         if (bookVisible == true)
         {
-            handleRot.xRotation = Math.Clamp(handleRot.xRotation, -15f, 15f);
-            handleRot.playerCam.localRotation = Quaternion.Euler(handleRot.xRotation, 0f, 0f);
+            startSmooth();
         }
+
+    }
+    IEnumerator smoothFocus(float elapsed = 0)
+    {
+        float duration = 1;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+            t = Mathf.SmoothStep(0f, 1f, t);
+            var aim = Mathf.Clamp(handleRot.xRotation, -10f, 10f);
+            Quaternion targetRot = Quaternion.Euler(aim, 0f, 0f);
+            handleRot.playerCam.localRotation = Quaternion.Lerp(handleRot.playerCam.localRotation, targetRot, t);
+            yield return null;
+        }
+    }
+    void startSmooth()
+    {
+        StartCoroutine(smoothFocus());
     }
 
     IEnumerator BookVisiblity()
