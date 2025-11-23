@@ -14,6 +14,8 @@ public class GuideBook : MonoBehaviour
     private Vector3 initalBookPos;
     [Header("Bools")]
     public bool bookVisible = false;
+    Quaternion targetRot;
+
 
     void Awake()
     {
@@ -62,27 +64,36 @@ public class GuideBook : MonoBehaviour
         }
         if (bookVisible == true)
         {
-            startSmooth();
+            startlimit();
+            handleRot.playerCam.localRotation = targetRot;
         }
-
-    }
-    IEnumerator smoothFocus(float elapsed = 0)
-    {
-        float duration = 1;
-        while (elapsed < duration)
+        IEnumerator limitLook()
         {
-            elapsed += Time.deltaTime;
-            float t = elapsed / duration;
-            t = Mathf.SmoothStep(0f, 1f, t);
-            var aim = Mathf.Clamp(handleRot.xRotation, -10f, 10f);
-            Quaternion targetRot = Quaternion.Euler(aim, 0f, 0f);
-            handleRot.playerCam.localRotation = Quaternion.Lerp(handleRot.playerCam.localRotation, targetRot, t);
-            yield return null;
+            float duration = 1f;
+            float elapsed = 0f;
+
+
+            handleRot.xRotation = Mathf.Clamp(handleRot.xRotation, -15f, 15f);
+
+            Quaternion startRot = handleRot.playerCam.localRotation;
+            targetRot = Quaternion.Euler(handleRot.xRotation, 0f, 0f);
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                float t = elapsed / duration;
+                t = Mathf.SmoothStep(0f, 1f, t);
+                handleRot.playerCam.localRotation = Quaternion.Slerp(startRot, targetRot, t);
+
+                yield return null;
+            }
+
+
         }
-    }
-    void startSmooth()
-    {
-        StartCoroutine(smoothFocus());
+        void startlimit()
+        {
+            StartCoroutine(limitLook());
+        }
     }
 
     IEnumerator BookVisiblity()
