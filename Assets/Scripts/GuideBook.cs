@@ -65,7 +65,7 @@ public class GuideBook : MonoBehaviour
         if (bookVisible == true)
         {
             startlimit();
-            handleRot.playerCam.localRotation = targetRot;
+
         }
         IEnumerator limitLook()
         {
@@ -87,6 +87,7 @@ public class GuideBook : MonoBehaviour
 
                 yield return null;
             }
+            handleRot.playerCam.localRotation = targetRot;
 
 
         }
@@ -117,6 +118,7 @@ public class GuideBook : MonoBehaviour
     void StartBookVis()
     {
         StartCoroutine(BookVisiblity());
+
     }
     IEnumerator CarryBook(bool Opening)
     {
