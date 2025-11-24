@@ -96,7 +96,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 432f8cd1ed482e04eb5d04a80bdd8e64, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -231,8 +231,9 @@ Transform:
   m_Children:
   - {fileID: 963194228}
   - {fileID: 2103757614}
-  - {fileID: 684726994}
   - {fileID: 1047128217}
+  - {fileID: 767975407}
+  - {fileID: 684726994}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &6638285
@@ -822,7 +823,7 @@ GameObject:
   - component: {fileID: 270355117}
   - component: {fileID: 270355116}
   - component: {fileID: 270355115}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bookCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1000,7 +1001,7 @@ GameObject:
   - component: {fileID: 294241351}
   - component: {fileID: 294241353}
   - component: {fileID: 294241352}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PageFirst
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1899,7 +1900,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 640702276}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pageSpriteSec
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1937,7 +1938,7 @@ GameObject:
   - component: {fileID: 680570877}
   - component: {fileID: 680570879}
   - component: {fileID: 680570878}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PageFirst
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2007,7 +2008,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 684726994}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: book
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2023,8 +2024,8 @@ Transform:
   m_GameObject: {fileID: 684726993}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.48, y: -0.715, z: 1.897}
-  m_LocalScale: {x: 1, y: 0.5301416, z: 1}
+  m_LocalPosition: {x: -0.48000002, y: -0.7150001, z: 1.8970001}
+  m_LocalScale: {x: 1, y: 0.53014165, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 270355114}
@@ -2032,6 +2033,98 @@ Transform:
   - {fileID: 884853908}
   m_Father: {fileID: 6638284}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &767975406
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 767975407}
+  - component: {fileID: 767975409}
+  - component: {fileID: 767975408}
+  m_Layer: 0
+  m_Name: Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &767975407
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767975406}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.008000374, y: 0.635, z: -0.027999878}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6638284}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &767975408
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767975406}
+  m_Enabled: 1
+--- !u!20 &767975409
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767975406}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 3
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.1
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 256
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
 --- !u!1 &770268084
 GameObject:
   m_ObjectHideFlags: 0
@@ -2232,7 +2325,7 @@ GameObject:
   - component: {fileID: 788733284}
   - component: {fileID: 788733283}
   - component: {fileID: 788733282}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2544,7 +2637,7 @@ GameObject:
   - component: {fileID: 884853907}
   - component: {fileID: 884853906}
   - component: {fileID: 884853905}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2646,7 +2739,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 951306749}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pageSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4128,7 +4221,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1628176848}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pageSpriteThirth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4272,7 +4365,7 @@ GameObject:
   - component: {fileID: 1685926351}
   - component: {fileID: 1685926353}
   - component: {fileID: 1685926352}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PageFirst
   m_TagString: Untagged
   m_Icon: {fileID: 0}

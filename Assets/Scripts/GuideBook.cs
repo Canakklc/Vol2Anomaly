@@ -69,7 +69,7 @@ public class GuideBook : MonoBehaviour
         }
         IEnumerator limitLook()
         {
-            float duration = 1f;
+            float duration = 0.7f;
             float elapsed = 0f;
 
 
