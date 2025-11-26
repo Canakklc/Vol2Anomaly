@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class GuideBook : MonoBehaviour
 {
@@ -15,6 +16,11 @@ public class GuideBook : MonoBehaviour
     [Header("Bools")]
     public bool bookVisible = false;
     Quaternion targetRot;
+    Coroutine limitRoutine;
+    public bool onBook = false;
+    public bool canLook = true;
+
+
 
 
     void Awake()
@@ -37,6 +43,8 @@ public class GuideBook : MonoBehaviour
     }
     void Update()
     {
+        limitation();
+
         if (Input.GetKeyDown(KeyCode.B))
         {
             StartResetPages();
@@ -46,15 +54,17 @@ public class GuideBook : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.E) && bookVisible == true)
         {
-            if (currentIndex < Pages.Count)
+            if (currentIndex < Pages.Count && canFlipPages == true)
             {
+                canFlipPages = false;
                 StartMovePages();
                 currentIndex++;
             }
             else { return; }
         }
-        if (Input.GetKeyDown(KeyCode.Q) && bookVisible == true)
+        if (Input.GetKeyDown(KeyCode.Q) && bookVisible == true && canFlipPages == true)
         {
+            canFlipPages = false;
             if (currentIndex > 0)
             {
                 MovePagesBack();
@@ -64,9 +74,21 @@ public class GuideBook : MonoBehaviour
         }
         if (bookVisible == true)
         {
-            startlimit();
+            if (limitRoutine == null)
+            {
+                onBook = true;
+                limitRoutine = StartCoroutine(limitLook());
+
+            }
 
         }
+        else if (limitRoutine != null)
+        {
+            onBook = false;
+            StopCoroutine(limitRoutine);
+            limitRoutine = null;
+        }
+
         IEnumerator limitLook()
         {
             float duration = 0.7f;
@@ -78,23 +100,31 @@ public class GuideBook : MonoBehaviour
             Quaternion startRot = handleRot.playerCam.localRotation;
             targetRot = Quaternion.Euler(handleRot.xRotation, 0f, 0f);
 
+
             while (elapsed < duration)
             {
                 elapsed += Time.deltaTime;
                 float t = elapsed / duration;
                 t = Mathf.SmoothStep(0f, 1f, t);
+                canLook = false;
                 handleRot.playerCam.localRotation = Quaternion.Slerp(startRot, targetRot, t);
 
                 yield return null;
             }
+            canLook = true;
             handleRot.playerCam.localRotation = targetRot;
 
-
         }
-        void startlimit()
+        void limitation()
         {
-            StartCoroutine(limitLook());
+            if (onBook == true)
+            {
+                handleRot.xRotation = Mathf.Clamp(handleRot.xRotation, -15f, 15f);
+                handleRot.playerCam.localRotation = Quaternion.Euler(handleRot.xRotation, 0f, 0f);
+            }
         }
+
+
     }
 
     IEnumerator BookVisiblity()
@@ -148,6 +178,7 @@ public class GuideBook : MonoBehaviour
     public List<Quaternion> endRot = new List<Quaternion>();
 
     public int currentIndex = 0;
+    public bool canFlipPages = true;
 
     IEnumerator MovePages(int index, bool front)
     {
@@ -165,22 +196,28 @@ public class GuideBook : MonoBehaviour
             yield return null;
 
         }
+        canFlipPages = true;
 
     }
     void StartMovePages()
     {
+        if (currentIndex < 0 || currentIndex >= Pages.Count) return;
+        Pages[currentIndex].SetAsLastSibling();
         StartCoroutine(MovePages(currentIndex, true));
+
     }
     void MovePagesBack()
     {
-        StartCoroutine(MovePages(currentIndex - 1, false));
-        Debug.Log("PAGES RE MOVIGN BACK");
+        int backIndex = currentIndex - 1;
+        if (backIndex < 0) return;
+        Pages[backIndex].SetAsLastSibling();
+        StartCoroutine(MovePages(backIndex, false));
     }
     IEnumerator ResetPages()
     {
         for (int i = 0; i < Pages.Count; i++)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
             Pages[i].transform.localRotation = startRot[i];
         }
     }

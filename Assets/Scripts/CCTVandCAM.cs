@@ -171,6 +171,7 @@ public class CCTVandCAM : MonoBehaviour
     public void TriggerCamLogic()
     {
         StartCoroutine(CameraLogic());
+
     }
 
 

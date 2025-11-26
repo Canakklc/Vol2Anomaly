@@ -48,7 +48,10 @@ public class charMovement : MonoBehaviour
     {
         if (takeBool.onCCTV == false)
         {
-            Look();
+            if (bookBool.canLook == true)
+            {
+                Look();
+            }
             HandleJump();
             FallMultiplier();
             sprintStamina();
@@ -116,7 +119,10 @@ public class charMovement : MonoBehaviour
         transform.Rotate(Vector3.up * mouseX);
 
         xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        if (bookBool.onBook == false)
+        {
+            xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        }
         playerCam.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
     }
 
