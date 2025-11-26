@@ -39,6 +39,9 @@ public class GuideBook : MonoBehaviour
         {
             startRot.Add(Pages[i].localRotation);
             endRot.Add(Pages[i].localRotation * Quaternion.Euler(0, 169.62f, 0));
+
+            siblings.Add(Pages[i].GetSiblingIndex());
+
         }
     }
     void Update()
@@ -47,6 +50,7 @@ public class GuideBook : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.B))
         {
+            canFlipPages = true;
             StartResetPages();
             currentIndex = 0;
             StartBookVis();
@@ -176,6 +180,7 @@ public class GuideBook : MonoBehaviour
     public List<Transform> Pages = new List<Transform>();
     public List<Quaternion> startRot = new List<Quaternion>();
     public List<Quaternion> endRot = new List<Quaternion>();
+    private List<int> siblings = new List<int>();
 
     public int currentIndex = 0;
     public bool canFlipPages = true;
@@ -219,6 +224,7 @@ public class GuideBook : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
             Pages[i].transform.localRotation = startRot[i];
+            Pages[i].SetSiblingIndex(siblings[i]);
         }
     }
     void StartResetPages()

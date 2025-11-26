@@ -11,6 +11,8 @@ public class EnemySpawner : MonoBehaviour
     public GameObject Player;
     public bool canInstantiate = true;
     int index;
+    int choosenNum;
+
 
 
     void Start()
@@ -26,23 +28,29 @@ public class EnemySpawner : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G))
         {
             JackPot();
+            GhostInstantiate();
         }
     }
 
     void GhostInstantiate()
     {
+
         if (canInstantiate == true)
         {
-            index = UnityEngine.Random.Range(0, spawnPoses.Count);
-            GameObject newGhost = Instantiate(Ghost, spawnPoses[index].transform.position, spawnPoses[index].transform.rotation);
-            canInstantiate = false;
-            Vector3 dir = Player.transform.position - Ghost.transform.position;
-            newGhost.transform.LookAt(dir);
+            var booling = choosenNum < 10;
+            if (booling)
+            {
+                index = UnityEngine.Random.Range(0, spawnPoses.Count);
+                GameObject newGhost = Instantiate(Ghost, spawnPoses[index].transform.position, spawnPoses[index].transform.rotation);
+                canInstantiate = false;
+                Vector3 dir = Player.transform.position - Ghost.transform.position;
+                newGhost.transform.LookAt(dir);
+            }
         }
     }
     void JackPot()
     {
-        int choosenNum = UnityEngine.Random.Range(0, numbers.Count);
+        choosenNum = UnityEngine.Random.Range(0, numbers.Count);
         if (choosenNum < 10)
         {
             Debug.Log("spawn should work" + choosenNum);
