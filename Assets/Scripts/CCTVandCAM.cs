@@ -18,6 +18,7 @@ public class CCTVandCAM : MonoBehaviour
     public Button nextCam;
     public Button exitButton;
     charMovement charMove;
+    objectAnomalies objectFall;
     Raycast takeRay;
     public List<Camera> allCams = new List<Camera>();
     void Start()
@@ -33,6 +34,7 @@ public class CCTVandCAM : MonoBehaviour
         takeRay = GetComponent<Raycast>();
         mainCam = Camera.main;
         takeEffects = GameObject.FindWithTag("Settings").GetComponent<CamPostProcess>();
+        objectFall = GetComponent<objectAnomalies>();
     }
     void Update()
     {
@@ -171,6 +173,7 @@ public class CCTVandCAM : MonoBehaviour
     public void TriggerCamLogic()
     {
         StartCoroutine(CameraLogic());
+        objectFall.StartPossibilities();
 
     }
 
