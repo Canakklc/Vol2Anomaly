@@ -506,7 +506,7 @@ GameObject:
   - component: {fileID: 88444341}
   - component: {fileID: 88444342}
   m_Layer: 0
-  m_Name: Light
+  m_Name: LightSec
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1362,7 +1362,7 @@ GameObject:
   - component: {fileID: 384065339}
   - component: {fileID: 384065340}
   m_Layer: 0
-  m_Name: Light
+  m_Name: LightFirst
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1473,6 +1473,7 @@ GameObject:
   - component: {fileID: 447792226}
   - component: {fileID: 447792227}
   - component: {fileID: 447792228}
+  - component: {fileID: 447792229}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Settings
@@ -1673,6 +1674,25 @@ MonoBehaviour:
   canCreateNewRandom: 1
   setCreatureType: 
   determineCreatureInt: 0
+--- !u!114 &447792229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 447792218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abc726386475e414eb8b3872c22ae419, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomLights:
+  - {fileID: 384065338}
+  - {fileID: 88444340}
+  - {fileID: 908258368}
+  canFlicker: 000000
+  canCreateRandom: 1
+  timerForFlick: 0
 --- !u!1 &467947859
 GameObject:
   m_ObjectHideFlags: 0
@@ -3282,7 +3302,7 @@ GameObject:
   - component: {fileID: 908258369}
   - component: {fileID: 908258370}
   m_Layer: 0
-  m_Name: Light
+  m_Name: LightThird
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
